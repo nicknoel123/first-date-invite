@@ -54,6 +54,12 @@
       position: relative;
     }
 
+    .btn-play {
+      margin-top: 15px;
+      background-color: #ff69b4;
+      color: white;
+    }
+
     button:hover {
       transform: scale(1.1);
     }
@@ -79,7 +85,7 @@
     </div>
   </div>
 
-  <!-- Audio element, controlled by JS -->
+  <!-- Audio element -->
   <audio id="music" loop>
     <source src="https://raw.githubusercontent.com/YOUR_USERNAME/first-date-invite/main/oursong.mp3" type="audio/mpeg">
   </audio>
@@ -99,13 +105,13 @@
       noBtn.style.top = `${y}px`;
     });
 
-    // Click Yes -> play music + show date
     yesBtn.addEventListener('click', () => {
-      // Attempt to play audio on user interaction
+      // Try to play music
       const playPromise = music.play();
       if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Audio play was blocked. User interaction required.");
+        playPromise.catch(() => {
+          // If autoplay is blocked, show fallback button
+          showPlayButton();
         });
       }
 
@@ -121,6 +127,14 @@
         <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzE2Nm4xbHpta2dwejE4ZnFpamQ4bWN5ZjdwYnZwbjE0NHNpcDQybiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/RLRaDgnYY4i26hot7f/giphy.gif" alt="cute celebration">
       `;
     });
+
+    function showPlayButton() {
+      const btn = document.createElement('button');
+      btn.textContent = "🎵 Play Our Song";
+      btn.className = "btn-play";
+      btn.onclick = () => music.play();
+      card.appendChild(btn);
+    }
   </script>
 
 </body>
