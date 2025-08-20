@@ -105,17 +105,8 @@
       noBtn.style.top = `${y}px`;
     });
 
+    // Click Yes -> show date info + GIF + play music button
     yesBtn.addEventListener('click', () => {
-      // Try to play music
-      const playPromise = music.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If autoplay is blocked, show fallback button
-          showPlayButton();
-        });
-      }
-
-      // Show date info + GIF
       card.innerHTML = `
         <div class="date-info">
           <p>Yay! I can’t wait to see the prettiest girl again💖</p>
@@ -125,16 +116,15 @@
           <p>⏰ I'll pick you up at 8:00 PM</p>
         </div>
         <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzE2Nm4xbHpta2dwejE4ZnFpamQ4bWN5ZjdwYnZwbjE0NHNpcDQybiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/RLRaDgnYY4i26hot7f/giphy.gif" alt="cute celebration">
+        <button class="btn-play" id="playBtn">🎵 Play Our Song</button>
       `;
-    });
 
-    function showPlayButton() {
-      const btn = document.createElement('button');
-      btn.textContent = "🎵 Fav Song off the album";
-      btn.className = "btn-play";
-      btn.onclick = () => music.play();
-      card.appendChild(btn);
-    }
+      // Add event listener for play button
+      const playBtn = document.getElementById('playBtn');
+      playBtn.addEventListener('click', () => {
+        music.play();
+      });
+    });
   </script>
 
 </body>
