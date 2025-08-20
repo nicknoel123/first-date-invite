@@ -28,9 +28,7 @@
       margin-bottom: 30px;
     }
 
-    .btns {
-      display: flex;
-      justify-content: space-around;
+    .btns, .btn-play {
       margin-top: 20px;
     }
 
@@ -41,22 +39,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.2s;
-    }
-
-    .btn-yes {
       background-color: #ff6f61;
-      color: white;
-    }
-
-    .btn-no {
-      background-color: #ffcccb;
-      color: black;
-      position: relative;
-    }
-
-    .btn-play {
-      margin-top: 15px;
-      background-color: #ff69b4;
       color: white;
     }
 
@@ -74,25 +57,26 @@
       font-weight: bold;
     }
 
-    iframe.audio-frame {
-      display: none; /* hide the iframe until play */
+    iframe {
+      width: 0;
+      height: 0;
+      border: 0;
     }
   </style>
 </head>
 <body>
-
   <div class="card" id="card">
     <h1>Can I take you out on an official first date? 💕</h1>
     <div class="btns">
-      <button class="btn-yes" id="yesBtn">Yes</button>
-      <button class="btn-no" id="noBtn">No</button>
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
     </div>
   </div>
 
   <script>
+    const card = document.getElementById('card');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
-    const card = document.getElementById('card');
 
     // Make No button run away
     noBtn.addEventListener('mouseenter', () => {
@@ -104,7 +88,6 @@
     });
 
     yesBtn.addEventListener('click', () => {
-      // Show date info + GIF + Play button
       card.innerHTML = `
         <div class="date-info">
           <p>Yay! I can’t wait to see the prettiest girl again💖</p>
@@ -114,23 +97,18 @@
           <p>⏰ I'll pick you up at 8:00 PM</p>
         </div>
         <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzE2Nm4xbHpta2dwejE4ZnFpamQ4bWN5ZjdwYnZwbjE0NHNpcDQybiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/RLRaDgnYY4i26hot7f/giphy.gif" alt="cute celebration">
-        <button class="btn-play" id="playBtn">🎵 Play Our Song</button>
+        <button id="playBtn">🎵 Play Our Song</button>
+        <div id="youtubeContainer"></div>
       `;
 
-      // Add click listener to play YouTube song
       const playBtn = document.getElementById('playBtn');
-      playBtn.addEventListener('click', () => {
-        const iframe = document.createElement('iframe');
-        iframe.className = 'audio-frame';
-        iframe.src = "https://www.youtube.com/embed/C0GTK1KE25I?autoplay=1&loop=1&playlist=C0GTK1KE25I";
-        iframe.allow = "autoplay";
-        document.body.appendChild(iframe);
+      const youtubeContainer = document.getElementById('youtubeContainer');
 
-        // Optionally hide the button after starting
+      playBtn.addEventListener('click', () => {
+        youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/C0GTK1KE25I?autoplay=1" allow="autoplay" frameborder="0"></iframe>`;
         playBtn.style.display = 'none';
       });
     });
   </script>
-
 </body>
 </html>
