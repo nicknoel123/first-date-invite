@@ -79,15 +79,16 @@
     </div>
   </div>
 
-  <!-- Hidden YouTube audio -->
-  <iframe id="ytAudio" width="0" height="0" style="display:none"
-    src="https://www.youtube.com/embed/C0GTK1KE25I?autoplay=1&loop=1&playlist=C0GTK1KE25I"
-    frameborder="0" allow="autoplay"></iframe>
+  <!-- Hidden audio -->
+  <audio id="music" loop>
+    <source src="https://raw.githubusercontent.com/YOUR_USERNAME/first-date-invite/main/oursong.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const card = document.getElementById('card');
+    const music = document.getElementById('music');
 
     noBtn.addEventListener('mouseenter', () => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -98,6 +99,10 @@
     });
 
     yesBtn.addEventListener('click', () => {
+      // Play the music
+      music.play();
+
+      // Show the date info and GIF
       card.innerHTML = `
         <div class="date-info">
           <p>Yay! I can’t wait to see the prettiest girl again💖</p>
