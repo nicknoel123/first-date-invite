@@ -28,7 +28,9 @@
       margin-bottom: 30px;
     }
 
-    .btns, .btn-play {
+    .btns {
+      display: flex;
+      justify-content: space-around;
       margin-top: 20px;
     }
 
@@ -39,7 +41,22 @@
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.2s;
+    }
+
+    .btn-yes {
       background-color: #ff6f61;
+      color: white;
+    }
+
+    .btn-no {
+      background-color: #ffcccb;
+      color: black;
+      position: relative;
+    }
+
+    .btn-play {
+      margin-top: 20px;
+      background-color: #ff69b4;
       color: white;
     }
 
@@ -68,8 +85,8 @@
   <div class="card" id="card">
     <h1>Can I take you out on an official first date? 💕</h1>
     <div class="btns">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
+      <button id="yesBtn" class="btn-yes">Yes</button>
+      <button id="noBtn" class="btn-no">No</button>
     </div>
   </div>
 
@@ -88,6 +105,7 @@
     });
 
     yesBtn.addEventListener('click', () => {
+      // Clear current card content and add new HTML
       card.innerHTML = `
         <div class="date-info">
           <p>Yay! I can’t wait to see the prettiest girl again💖</p>
@@ -97,15 +115,16 @@
           <p>⏰ I'll pick you up at 8:00 PM</p>
         </div>
         <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzE2Nm4xbHpta2dwejE4ZnFpamQ4bWN5ZjdwYnZwbjE0NHNpcDQybiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/RLRaDgnYY4i26hot7f/giphy.gif" alt="cute celebration">
-        <button id="playBtn">🎵 Play Our Song</button>
+        <button id="playBtn" class="btn-play">🎵 Play Our Song</button>
         <div id="youtubeContainer"></div>
       `;
 
+      // Wait for the DOM to render the button, then attach click listener
       const playBtn = document.getElementById('playBtn');
       const youtubeContainer = document.getElementById('youtubeContainer');
 
       playBtn.addEventListener('click', () => {
-        youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/C0GTK1KE25I?autoplay=1" allow="autoplay" frameborder="0"></iframe>`;
+        youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/C0GTK1KE25I?autoplay=1&loop=1&playlist=C0GTK1KE25I" allow="autoplay" frameborder="0"></iframe>`;
         playBtn.style.display = 'none';
       });
     });
